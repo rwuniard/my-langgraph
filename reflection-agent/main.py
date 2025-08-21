@@ -52,7 +52,9 @@ def should_continue(state: GraphState):
         return END
     return REFLECT 
 
+# This is to add conditional edges from GENERATE to either END or REFLECT
 builder.add_conditional_edges(GENERATE, should_continue, {END:END, REFLECT:REFLECT})
+# This is to add an edge from REFLECT to GENERATE
 builder.add_edge(REFLECT, GENERATE)
 
 graph = builder.compile()
