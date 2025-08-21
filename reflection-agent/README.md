@@ -1,6 +1,6 @@
 # Reflection Agent
 
-This project uses LangGraph to create a conversational agent with a generate-reflect cycle. The primary agent is designed to generate and refine tweets based on user input and critiques.
+This project uses LangGraph to create a conversational agent with a generate-reflect cycle. The primary agent is designed to generate and refine tweets based on user input and critiques using StateGraph for flexible state management.
 
 ## Project Structure
 
@@ -11,15 +11,22 @@ This project uses LangGraph to create a conversational agent with a generate-ref
 
 ## Agent Flow
 
-This diagram visualizes the agent's logic flow.
+The agent uses StateGraph to manage message state through a generate-reflect cycle that continues until 6 messages are reached or the content is approved.
 
 ```mermaid
 graph TD
     A[Start] --> B(Generate);
     B -->|Needs Review| C{Reflect};
     C -->B;
-    B -->|Approved| D[End];
+    B -->|Approved or 6 messages| D[End];
 ```
+
+### Architecture Details
+
+- **StateGraph**: Uses custom `GraphState` TypedDict to manage message history
+- **Generation Node**: Creates Twitter posts using LangChain generation chain
+- **Reflection Node**: Provides critiques and improvement suggestions
+- **Conditional Logic**: Terminates after 6 messages or when content is approved
 
 ## Setup Instructions
 
