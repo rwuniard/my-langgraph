@@ -23,7 +23,7 @@ graph TD
     A[Start] --> B(Generate);
     B -->|Needs Review| C{Reflect};
     C -->B;
-    B -->|Approved or 6 messages| D[End];
+    B -->|6 messages| D[End];
 ```
 
 ### Architecture Details
