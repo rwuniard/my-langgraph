@@ -33,9 +33,44 @@ graph TD
 - **Reflection Node**: Provides critiques and improvement suggestions
 - **Conditional Logic**: Terminates after 6 messages or when content is approved
 
-## Setup Instructions
+## Project Setup from Scratch
 
-Follow these steps to set up and run the project. All commands should be run from this directory (`reflection-agent`).
+If you're creating this project from scratch, follow these initial setup steps:
+
+### 1. Initialize Project with uv
+
+```bash
+# Initialize a new Python project
+uv init
+
+# Add all required dependencies  
+uv add python-dotenv black isort langchain langchain-openai langgraph
+```
+
+### 2. Create Environment Files
+
+Create the environment template:
+
+```bash
+# Create .env_template
+cat > .env_template << 'EOF'
+# OpenAI API Configuration
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Optional: LangSmith Tracing (for debugging)
+LANGCHAIN_TRACING_V2=false
+LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
+LANGCHAIN_API_KEY=your_langsmith_api_key_here
+LANGCHAIN_PROJECT=reflection-agent
+EOF
+
+# Copy template to create actual .env file
+cp .env_template .env
+```
+
+## Setup Instructions for Existing Project
+
+Follow these steps to set up and run the existing project. All commands should be run from this directory (`reflection-agent`).
 
 ### 1. Create and Activate Virtual Environment
 
@@ -55,21 +90,18 @@ source .venv/bin/activate
 
 ### 2. Install Dependencies
 
-Install the required Python packages. If you encounter build errors with editable install, use the alternative method:
+Install the required Python packages:
 
 ```bash
-# Method 1: Try editable install first
+# Install dependencies from pyproject.toml
 uv pip install -e .
-
-# Method 2: If above fails, install dependencies directly
-uv add langchain langchain-openai langgraph python-dotenv black isort grandalf
 ```
 
 ### 3. Set Up Environment Variables
 
 The project requires an OpenAI API key.
 
-First, copy the template file:
+Copy the template file and add your API key:
 
 ```bash
 cp .env_template .env
