@@ -31,6 +31,9 @@ LANGCHAIN_TRACING_V2=false
 LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 LANGCHAIN_API_KEY=your_langsmith_api_key_here
 LANGCHAIN_PROJECT=reflexion-agent
+
+# Tavily key
+TAVILY_API_KEY=your_tavily_api_key_here
 EOF
 ```
 
@@ -52,6 +55,29 @@ OPENAI_API_KEY="sk-..."
 # Activate the virtual environment created by uv init
 source .venv/bin/activate
 ```
+
+### 4. Configure IDE Python Interpreter
+
+To ensure your IDE uses the correct Python environment:
+
+**For VS Code:**
+1. Open Command Palette: `Shift+Cmd+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+2. Select `Python: Select Interpreter`
+3. Choose `Enter interpreter path...`
+4. Enter the absolute path to your virtual environment:
+   ```
+   /absolute/path/to/your/project/2. reflexion-agent/.venv/bin/python
+   ```
+
+**Example path:**
+```
+/Users/yourusername/Projects/python/my-langgraph/2. reflexion-agent/.venv/bin/python
+```
+
+This ensures your IDE can:
+- Load environment variables from `.env` file
+- Use the correct Python interpreter with installed dependencies
+- Provide proper code completion and debugging
 
 ## Project Structure
 
