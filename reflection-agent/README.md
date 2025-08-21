@@ -2,6 +2,11 @@
 
 This project uses LangGraph to create a conversational agent with a generate-reflect cycle. The primary agent is designed to generate and refine tweets based on user input and critiques using StateGraph for flexible state management.
 
+#### This project seems to come from this source:
+- https://blog.langchain.com/reflection-agents/
+
+
+
 ## Project Structure
 
 -   `main.py`: The main entry point for running the agent.
