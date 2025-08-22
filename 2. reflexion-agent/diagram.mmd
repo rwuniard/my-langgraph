@@ -1,0 +1,6 @@
+graph TD
+A[Start] --> B(Responder);
+B --> |Initial response|C(Execute Tools);
+C --> D(Revisor)
+D -->|Revised Response| C;
+D --> |Final Response| E(End);
