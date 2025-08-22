@@ -13,7 +13,7 @@ Follow these steps to initialize and set up the project from scratch:
 uv init
 
 # Add all required dependencies  
-uv add python-dotenv black isort langchain langchain-openai langgraph
+uv add python-dotenv black isort langchain langchain-openai langchain-tavily langgraph grandalf
 ```
 
 ### 2. Create Environment Files
@@ -84,19 +84,24 @@ This ensures your IDE can:
 After setup, your project should have:
 
 - `main.py`: The main entry point for running the agent
-- `chains.py`: LangChain Expression Language (LCEL) chains for generation and reflection  
+- `chains.py`: LangChain Expression Language (LCEL) chains for generation and reflection
+- `schemas.py`: Pydantic models for structured outputs (AnswerQuestion, RevisedAnswer, Reflection)
+- `tool_executor.py`: Tool execution logic for Tavily search integration
+- `diagram.mmd`: Mermaid diagram showing the agent flow
 - `pyproject.toml`: Project dependencies managed by uv
 - `.env_template`: Template for environment variables
 - `.env`: Your actual environment variables (not committed to git)
 
 ## Architecture
 
-This project will implement:
+This project implements:
 
-- **StateGraph**: Custom state management using TypedDict
-- **Generation Node**: Creates content using LangChain generation chain
-- **Reflection Node**: Provides critiques and improvement suggestions
-- **Conditional Logic**: Controls flow based on message count or approval criteria
+- **StateGraph**: Custom state management using TypedDict for agent orchestration
+- **First Responder Node**: Creates initial research responses (~250 words) with built-in reflection
+- **Tool Execution Node**: Runs Tavily search queries to gather additional information
+- **Revisor Node**: Refines answers using search results and adds citations
+- **Conditional Logic**: Controls flow between research and revision cycles
+- **Structured Outputs**: Uses Pydantic models for consistent response formatting
 
 ## Development
 
@@ -128,8 +133,10 @@ python main.py
 
 ## Dependencies
 
-- `langchain`: LLM framework
-- `langchain-openai`: OpenAI integration
-- `langgraph`: Graph-based agent framework
+- `langchain`: LLM framework and core components
+- `langchain-openai`: OpenAI GPT model integration
+- `langchain-tavily`: Tavily search API integration for research
+- `langgraph`: Graph-based agent framework for state management
 - `python-dotenv`: Environment variable management
+- `grandalf`: Graph visualization and layout algorithms
 - `black`, `isort`: Code formatting tools

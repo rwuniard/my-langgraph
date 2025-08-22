@@ -1,0 +1,16 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+        __start__([<p>__start__</p>]):::first
+        draft(draft)
+        execute_tools(execute_tools)
+        revise(revise)
+        __end__([<p>__end__</p>]):::last
+        __start__ --> draft;
+        draft --> execute_tools;
+        execute_tools --> revise;
+        revise -.-> __end__;
+        revise -.-> execute_tools;

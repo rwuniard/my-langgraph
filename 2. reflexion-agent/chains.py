@@ -66,6 +66,20 @@ revisor_prompt_template = actor_prompt_template.partial(
     first_instruction=revise_instruction
 )
 
+# First responder chain
+first_responder_chain = (
+    first_responder_prompt_template | 
+    llm.bind_tools(tools=[AnswerQuestion], tool_choice="AnswerQuestion") | 
+    answerquestion_parser_pydantic
+)
+
+# Revisor chain
+revisor_chain = (
+    revisor_prompt_template | 
+    llm.bind_tools(tools=[RevisedAnswer], tool_choice="RevisedAnswer") | 
+    revisedanswer_parser_pydantic
+)
+
 
 if __name__ == "__main__":
     human_message = HumanMessage(
@@ -73,12 +87,7 @@ if __name__ == "__main__":
         " list startups that do that and raised capital."
     )
 
-    # First responder chain
-    first_responder_chain = (
-        first_responder_prompt_template | 
-        llm.bind_tools(tools=[AnswerQuestion], tool_choice="AnswerQuestion") | 
-        answerquestion_parser_pydantic
-    )
+
 
     # First responder
     result = first_responder_chain.invoke({"messages": [human_message]})
@@ -91,12 +100,6 @@ if __name__ == "__main__":
     print("Reflection:", result[0].reflection)
 
 
-    # Revisor chain
-    revisor_chain = (
-        revisor_prompt_template | 
-        llm.bind_tools(tools=[RevisedAnswer], tool_choice="RevisedAnswer") | 
-        revisedanswer_parser_pydantic
-    )
 
 
 
