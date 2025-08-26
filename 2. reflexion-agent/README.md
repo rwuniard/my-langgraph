@@ -117,19 +117,28 @@ isort .
 ### Running the Application
 
 ```bash
-# Make sure virtual environment is activated
-source .venv/bin/activate
+# Run using uv (recommended)
+uv run python main.py
 
-# Run the main application
+# Or activate virtual environment and run
+source .venv/bin/activate
 python main.py
 ```
 
-## Next Steps
+The application will execute a research workflow on AI-powered SOC startups, showing progress indicators as it:
+1. Generates an initial draft response with self-critique
+2. Executes web searches using Tavily API
+3. Revises the response with search results and citations
+4. Repeats the research cycle up to 2 iterations for quality improvement
 
-1. Implement the StateGraph architecture in `main.py`
-2. Create the LangChain chains in `chains.py`
-3. Define your graph nodes and conditional logic
-4. Test the generate-reflect cycle
+## Example Output
+
+The agent processes complex research questions and provides structured outputs with:
+- Initial draft answer (~250 words)
+- Self-reflection identifying missing/superfluous content
+- Search queries for additional research
+- Revised answer with citations and references
+- Progress tracking through each iteration
 
 ## Dependencies
 
